@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Fragment upload</title>
+</head>
+<body>
+    <input type="file" id="uploadInput">
+    <button id="uploadBtn">文件上传</button>
+    <script src="./axios.js"></script>
+    <script>
+        const uploadInputDom = document.querySelector('#uploadInput')
+        const uploadBtnDom = document.getElementById('uploadBtn')
+
+        let arr
+        uploadInputDom.addEventListener('change', function(e) {
+            const files = event.target.files
+            if (!files || files.length === 0) return;
+            arr = files
+
+            axios('/upload')
+                .then(res => res.data)
+                .then(res => {
+                    console.log(res)
+                })
+        })
+
+        uploadBtnDom.addEventListener('click', function(event) {
+            event.preventDefault()
+
+            if (!arr || arr.length === 0) return;
+            
+        })
+    </script>
+</body>
+</html>
