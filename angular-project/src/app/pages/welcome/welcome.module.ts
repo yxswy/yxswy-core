@@ -29,10 +29,11 @@ import { NzMessageModule } from 'ng-zorro-antd/message'
 
 @NgModule({
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     CommonModule,
     WelcomeRoutingModule,
+    
+    FormsModule,
+    ReactiveFormsModule,
     NzTabsModule,
     NzSpaceModule,
     NzButtonModule,
