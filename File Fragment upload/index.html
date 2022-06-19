@@ -8,8 +8,8 @@
 </head>
 <body>
     <input type="file" id="uploadInput">
-    <button id="uploadBtn">文件上传</button>
-    <script src="./axios.js"></script>
+    <button id="uploadBtn">上传</button>
+    <script src="/axios.js"></script>
     <script>
         const uploadInputDom = document.querySelector('#uploadInput')
         const uploadBtnDom = document.getElementById('uploadBtn')
@@ -17,21 +17,64 @@
         let arr
         uploadInputDom.addEventListener('change', function(e) {
             const files = event.target.files
-            if (!files || files.length === 0) return;
+            if (!files || files.length === 0) return
             arr = files
-
-            axios('/upload')
-                .then(res => res.data)
-                .then(res => {
-                    console.log(res)
-                })
         })
 
-        uploadBtnDom.addEventListener('click', function(event) {
+        const SIZE = 1024 * 1024 * 10; // 10MB 切片大小
+        uploadBtnDom.addEventListener('click', async function(event) {
             event.preventDefault()
 
-            if (!arr || arr.length === 0) return;
-            
+            if (!arr || arr.length === 0) return
+
+            const createFileChunks = (file, size = SIZE) => {
+                let fileChunks = []
+                for (let cur = 0; cur < file.size; cur += size) {
+                    fileChunks.push(file.slice(cur, cur + size))
+                }
+                return fileChunks
+            }
+
+            const uploadFileChunks = async (fileChunks, filename) => {
+                const chunksList = fileChunks.map((chunk, index) => {
+                    let formData = new FormData()
+                    formData.append('filename', filename)
+                    formData.append('hash', index)
+                    formData.append('chunk', chunk)
+
+                    return {
+                        formData
+                    }
+                })
+
+                const uploadList = chunksList.map(({ formData }) => {
+                    return axios({
+                        method: 'post',
+                        url: '/upload',
+                        data: formData
+                    })
+                })
+
+                await Promise.all(uploadList)
+            }
+
+            const mergeFileChunks = async (filename) => {
+                await axios({
+                    method: 'get',
+                    url: 'merge',
+                    params: {
+                        filename
+                    }
+                })
+            }
+
+            const file = arr[0]
+            const fileChunks = createFileChunks(file)
+            console.log(1)
+            await uploadFileChunks(fileChunks, file.name)
+            console.log(2)
+            await mergeFileChunks(file.name)
+            console.log(3)
         })
     </script>
 </body>
