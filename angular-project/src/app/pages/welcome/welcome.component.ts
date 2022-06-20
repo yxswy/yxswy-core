@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 
 import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 import * as echarts from 'echarts';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
