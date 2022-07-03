@@ -1,5 +1,4 @@
-import { Outlet } from 'umi';
-import './index.less';
+import { Outlet, history, useLocation } from 'umi';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -9,14 +8,20 @@ import {
 import { Layout, Menu, MenuProps } from 'antd';
 import React, { useState } from 'react';
 
+import './index.less';
+
 const { Header, Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuProps['items'] = [
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
+  getItem('百度百科', '/'),
+
+  getItem('十足', '/function'),
+
+  getItem('Navigation Two', '/w', <AppstoreOutlined />, [
+    getItem('Option 5', '/docs'),
+    getItem('Option 6', '/jsis'),
     getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
   ]),
 
@@ -48,8 +53,12 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   const menuClick = ({ item, key, keyPath, domEvent }) => {
+    history.push(key)
     console.log(item, key, keyPath, domEvent)
   }
+
+  const location = useLocation()
+  const pathname = location.pathname
 
   return (
     <Layout className="app-root">
@@ -63,7 +72,7 @@ const App: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={[pathname]}
           onSelect={menuClick}
           items={items}
         />

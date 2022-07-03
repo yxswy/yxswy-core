@@ -5,9 +5,13 @@ export default {
     // dark: true,
     import: true,
   },
+  history: {
+    type: 'hash'
+  },
   routes: [
     { path: '', component: 'index' },
     { path: '/login', component: 'login' },
+    { path: '/function', component: 'function' },
     { path: '/docs', component: 'docs' },
     // {
     //   path: '/',
@@ -18,4 +22,5 @@ export default {
     //   ],
     // }, 
   ],
+  publicPath: '/yxswy-yhzx/'
 };

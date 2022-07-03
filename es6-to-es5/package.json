@@ -7,11 +7,10 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
     "@umijs/plugins": "4.0.1",
     "antd": "^4.20.6",
-    "echarts": "^5.3.3",
-    "umi": "^4.0.1"
+    "monaco-editor": "^0.33.0",
+    "umi": "^4.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
