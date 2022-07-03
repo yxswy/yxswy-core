@@ -7,6 +7,6 @@ import { CodeService } from './code.service';
 @Module({
   imports: [TypeOrmModule.forFeature([CodeEntity])],
   controllers: [CodeController],
-  providers: [CodeService]
+  providers: [CodeService],
 })
 export class CodeModule {}
