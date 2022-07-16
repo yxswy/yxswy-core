@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import ArrayToTree from 'array-to-tree';
-import AppDataSource from '../setup/setupTypeorm'
+import AppDataSource from '../typeorm'
 import { Tag } from '../entity/tag.entity'
 
 const createTag = async (req: Request, res: Response) => {

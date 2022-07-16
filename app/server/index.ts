@@ -7,10 +7,7 @@ import cookieParser from "cookie-parser";
 import { ViteDevServer } from "vite";
 import fs from "fs";
 import { resolve } from "path";
-
-import { testApi } from "../service/test/index";
-import { createUrl, getUrl } from "../service/url";
-import { createTag, getTagsAsTree } from "../service/tag";
+import router from "./router";
 
 async function createServer() {
   // 创建并设置express app
@@ -36,11 +33,7 @@ async function createServer() {
   app.use(cors());
   app.use(cookieParser());
 
-  setRoute("/", testApi);
-  setRoute("/url", getUrl);
-  setRoute("/url/create", createUrl);
-  setRoute("/tag", getTagsAsTree);
-  setRoute("/tag/create", createTag);
+  app.use("/api", router);
 
   app.use("*", async (req: Request, res: Response) => {
     const url = req.originalUrl.replace("/test/", "/");
@@ -61,29 +54,7 @@ async function createServer() {
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
-
-  function setRoute(path: string, handlerFunction: HandlerFunction) {
-    const handler = async (
-      req: Request,
-      res: Response,
-      next: NextFunction
-    ): Promise<void> => {
-      const result = await handlerFunction(req, res, next);
-      res.send(result);
-    };
-    const contextPath = "/api";
-
-    app.post(contextPath + path, handler);
-  }
   return { app };
-}
-
-interface HandlerFunction {
-  (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): unknown;
 }
 
 async function setupVite() {

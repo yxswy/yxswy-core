@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import AppDataSource from '../setup/setupTypeorm'
+import AppDataSource from '../typeorm'
 import { Url } from '../entity/url.entity'
 
 const createUrl = async (req: Request, res: Response) => {

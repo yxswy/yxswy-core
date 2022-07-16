@@ -1,9 +1,9 @@
 import { DataSource } from "typeorm";
-import { gray } from 'chalk'
+import { gray } from "chalk";
 
-import { Photo } from '../entity/photo.entity'
-import { Tag } from '../entity/tag.entity'
-import { Url } from '../entity/url.entity'
+import { Photo } from "./entity/photo.entity";
+import { Tag } from "./entity/tag.entity";
+import { Url } from "./entity/url.entity";
 
 const AppDataSource = new DataSource({
   type: "mysql",
@@ -14,7 +14,7 @@ const AppDataSource = new DataSource({
   database: "20210908",
   entities: [Photo, Tag, Url],
   synchronize: true,
-  logging: false
+  logging: false,
 });
 
 // to initialize initial connection with the database, register all entities
@@ -23,10 +23,8 @@ const AppDataSource = new DataSource({
 AppDataSource.initialize()
   .then(() => {
     // here you can start to work with your database
-    console.log(
-        gray(`\n   Database link successful `)
-    )
+    console.log(gray(`\n   Database link successful `));
   })
   .catch((error) => console.log(error));
 
-export default AppDataSource
+export default AppDataSource;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import AppDataSource from '../../setup/setupTypeorm'
+import AppDataSource from '../../typeorm'
 import { Tag } from '../../entity/tag.entity'
 
 const testApi = async (req: Request, res: Response) => {
