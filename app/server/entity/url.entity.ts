@@ -7,22 +7,22 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('url')
-export class UrlEntity extends BaseEntity {
+@Entity()
+export class Url extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ comment: '网址标题' })
-  title: string;
+  title!: string;
 
   @Column({ comment: '网址' })
-  url: string;
+  url!: string;
 
   @Column({ comment: '文章类型' })
-  type: string;
+  type!: string;
 
   @Column({ comment: '文章标签' })
-  tag: string;
+  tag!: string;
 
   //   @Column({ comment: '展示标题' })
   //   file_title: string;
@@ -31,11 +31,11 @@ export class UrlEntity extends BaseEntity {
   //   file_content: string;
 
   @Column({ comment: '阅读次数', default: 0 })
-  readings: number;
+  readings!: number;
 
   @CreateDateColumn()
-  create_time: Date;
+  create_time!: Date;
 
   @UpdateDateColumn()
-  update_time: Date;
+  update_time!: Date;
 }

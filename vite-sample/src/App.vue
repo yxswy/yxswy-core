@@ -23,302 +23,7 @@ const handleChange = (value: string) => {
   console.log(value)
 }
 
-const options = [
-  {
-    value: 'guide',
-    label: 'Vue2.js',
-    children: [
-      {
-        value: 'vue2',
-        label: '官方文档',
-      },
-      {
-        value: 'attr',
-        label: '属性',
-      },
-    ],
-  },
-  {
-    value: 'guide',
-    label: 'Vue3.js',
-    children: [
-      {
-        value: 'vue3',
-        label: '官方文档',
-      },
-      {
-        value: 'disciplines',
-        label: 'Proxy代理原理',
-      },
-    ],
-  },
-  {
-    value: 'guide',
-    label: 'Guide',
-    children: [
-      {
-        value: 'disciplines',
-        label: 'Disciplines',
-        children: [
-          {
-            value: 'consistency',
-            label: 'Consistency',
-          },
-          {
-            value: 'feedback',
-            label: 'Feedback',
-          },
-          {
-            value: 'efficiency',
-            label: 'Efficiency',
-          },
-          {
-            value: 'controllability',
-            label: 'Controllability',
-          },
-        ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'side nav',
-            label: 'Side Navigation',
-          },
-          {
-            value: 'top nav',
-            label: 'Top Navigation',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'component',
-    label: 'Component',
-    children: [
-      {
-        value: 'basic',
-        label: 'Basic',
-        children: [
-          {
-            value: 'layout',
-            label: 'Layout',
-          },
-          {
-            value: 'color',
-            label: 'Color',
-          },
-          {
-            value: 'typography',
-            label: 'Typography',
-          },
-          {
-            value: 'icon',
-            label: 'Icon',
-          },
-          {
-            value: 'button',
-            label: 'Button',
-          },
-        ],
-      },
-      {
-        value: 'form',
-        label: 'Form',
-        children: [
-          {
-            value: 'radio',
-            label: 'Radio',
-          },
-          {
-            value: 'checkbox',
-            label: 'Checkbox',
-          },
-          {
-            value: 'input',
-            label: 'Input',
-          },
-          {
-            value: 'input-number',
-            label: 'InputNumber',
-          },
-          {
-            value: 'select',
-            label: 'Select',
-          },
-          {
-            value: 'cascader',
-            label: 'Cascader',
-          },
-          {
-            value: 'switch',
-            label: 'Switch',
-          },
-          {
-            value: 'slider',
-            label: 'Slider',
-          },
-          {
-            value: 'time-picker',
-            label: 'TimePicker',
-          },
-          {
-            value: 'date-picker',
-            label: 'DatePicker',
-          },
-          {
-            value: 'datetime-picker',
-            label: 'DateTimePicker',
-          },
-          {
-            value: 'upload',
-            label: 'Upload',
-          },
-          {
-            value: 'rate',
-            label: 'Rate',
-          },
-          {
-            value: 'form',
-            label: 'Form',
-          },
-        ],
-      },
-      {
-        value: 'data',
-        label: 'Data',
-        children: [
-          {
-            value: 'table',
-            label: 'Table',
-          },
-          {
-            value: 'tag',
-            label: 'Tag',
-          },
-          {
-            value: 'progress',
-            label: 'Progress',
-          },
-          {
-            value: 'tree',
-            label: 'Tree',
-          },
-          {
-            value: 'pagination',
-            label: 'Pagination',
-          },
-          {
-            value: 'badge',
-            label: 'Badge',
-          },
-        ],
-      },
-      {
-        value: 'notice',
-        label: 'Notice',
-        children: [
-          {
-            value: 'alert',
-            label: 'Alert',
-          },
-          {
-            value: 'loading',
-            label: 'Loading',
-          },
-          {
-            value: 'message',
-            label: 'Message',
-          },
-          {
-            value: 'message-box',
-            label: 'MessageBox',
-          },
-          {
-            value: 'notification',
-            label: 'Notification',
-          },
-        ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'menu',
-            label: 'Menu',
-          },
-          {
-            value: 'tabs',
-            label: 'Tabs',
-          },
-          {
-            value: 'breadcrumb',
-            label: 'Breadcrumb',
-          },
-          {
-            value: 'dropdown',
-            label: 'Dropdown',
-          },
-          {
-            value: 'steps',
-            label: 'Steps',
-          },
-        ],
-      },
-      {
-        value: 'others',
-        label: 'Others',
-        children: [
-          {
-            value: 'dialog',
-            label: 'Dialog',
-          },
-          {
-            value: 'tooltip',
-            label: 'Tooltip',
-          },
-          {
-            value: 'popover',
-            label: 'Popover',
-          },
-          {
-            value: 'card',
-            label: 'Card',
-          },
-          {
-            value: 'carousel',
-            label: 'Carousel',
-          },
-          {
-            value: 'collapse',
-            label: 'Collapse',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'resource',
-    label: 'Resource',
-    children: [
-      {
-        value: 'axure',
-        label: 'Axure Components',
-      },
-      {
-        value: 'sketch',
-        label: 'Sketch Templates',
-      },
-      {
-        value: 'docs',
-        label: 'Design Documentation',
-      },
-    ],
-  },
-]
+const options = ref([])
 
 const searchDataByKeyword = () => {
   Nprogress.start()
@@ -364,7 +69,7 @@ const dialogConfirm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       axios
-        .post('http://localhost:3000/url/create', {
+        .post('http://localhost:3010/api/url/create', {
           data: form,
         })
         .then((res) => {
@@ -381,10 +86,19 @@ const dialogConfirm = async (formEl: FormInstance | undefined) => {
   })
 }
 
-const init = () => {
-  axios.get('http://localhost:3000/url').then((res) => {
+const init = async () => {
+  Nprogress.start()
+  try {
+    let res = await axios.post('http://localhost:3010/api/url')
     searchValue.value = res.data
-  })
+
+    res = await axios.post('http://localhost:3010/api/tag')
+    options.value = res.data
+  } catch (e) {
+    console.log(e)
+  } finally {
+    Nprogress.done()
+  }
 }
 
 onMounted(init)
@@ -528,7 +242,7 @@ body {
   cursor: pointer;
   z-index: 5;
   &:hover {
-    background-color: #0d6dff;
+    background-color: #0969da;
     i {
       color: white;
     }
@@ -536,8 +250,8 @@ body {
 }
 
 .append-form {
-  padding-top: 48px;
-  padding-bottom: 24px;
+  padding-top: 24px;
+  padding-bottom: 12px;
   .el-button--text {
     margin-right: 15px;
   }
@@ -585,6 +299,10 @@ body {
   以便能够正确地计算移动的动画。 */
 .list-leave-active {
   position: absolute;
+}
+
+.el-cascader-node {
+  font-weight: 700;
 }
 
 @media screen and (max-width: 1180px) and (min-width: 980px) {
