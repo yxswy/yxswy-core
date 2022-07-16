@@ -1,20 +1,16 @@
-import express, {
-  NextFunction,
-  Request,
-  Response,
-} from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { greenBright } from "chalk";
 import cors from "cors";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { ViteDevServer } from "vite";
+import fs from "fs";
+import { resolve } from "path";
 
 import { testApi } from "../service/test/index";
 import { createUrl, getUrl } from "../service/url";
 import { createTag, getTagsAsTree } from "../service/tag";
-import { app222 } from "../service/app/app";
-
 
 async function createServer() {
   // 创建并设置express app
@@ -24,17 +20,21 @@ async function createServer() {
   app.use(vite.middlewares);
 
   // 访问日志
-  app.use(logger(
-    greenBright(`\n   :remote-addr :method :url :status :res[content-length] - :response-time ms 👽👻`)
-  ))
+  app.use(
+    logger(
+      greenBright(
+        `\n   :remote-addr :method :url :status :res[content-length] - :response-time ms 👽👻`
+      )
+    )
+  );
 
   // 解析 body
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   // 跨域
   app.use(cors());
-  app.use(cookieParser())
+  app.use(cookieParser());
 
   setRoute("/", testApi);
   setRoute("/url", getUrl);
@@ -42,15 +42,33 @@ async function createServer() {
   setRoute("/tag", getTagsAsTree);
   setRoute("/tag/create", createTag);
 
-  app.use("*", (...args) => app222(...args, vite));
+  app.use("*", async (req: Request, res: Response) => {
+    const url = req.originalUrl.replace("/test/", "/");
 
-  function setRoute(path: string, handlerFunction: HandlerFunction) {6
+    let template, render;
+
+    template = fs.readFileSync(resolve("index.html"), "utf-8");
+
+    template = await vite.transformIndexHtml(url, template);
+    render = (await vite.ssrLoadModule("/src/entry-server.js")).render;
+
+    const mainfest = {};
+    const [appHtml, preloadLinks] = await render(url, mainfest);
+
+    const html = template
+      .replace(`<!--preload-links-->`, preloadLinks)
+      .replace(`<!--app-html-->`, appHtml);
+
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
+  });
+
+  function setRoute(path: string, handlerFunction: HandlerFunction) {
     const handler = async (
       req: Request,
       res: Response,
       next: NextFunction
     ): Promise<void> => {
-      const result = await handlerFunction(req, res, next, vite);
+      const result = await handlerFunction(req, res, next);
       res.send(result);
     };
     const contextPath = "/api";
@@ -64,8 +82,7 @@ interface HandlerFunction {
   (
     req: Request,
     res: Response,
-    next: NextFunction,
-    vite: ViteDevServer
+    next: NextFunction
   ): unknown;
 }
 
