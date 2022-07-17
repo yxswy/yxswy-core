@@ -1,0 +1,13 @@
+[ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".json"
+
+Node-ES6的import无法导入json文件的解决办法
+
+https://blog.csdn.net/weixin_43343144/article/details/121456830
+
+node --experimental-json-modules index.js
+
+
+
+//---------------
+
+https://github.com/element-plus/element-plus/blob/dev/ssr-testing/demo.spec.puppeteer.tsx

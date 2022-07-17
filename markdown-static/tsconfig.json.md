@@ -1,0 +1,4 @@
+---
+title: "tsconfig.json"
+date: "2022-03-21"
+---
