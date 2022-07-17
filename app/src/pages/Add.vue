@@ -3,7 +3,6 @@ import { reactive, ref, onMounted } from "vue";
 import axios from "axios";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import HelloWorld from "../components/HelloWorld.vue";
 import { FormInstance, FormRules } from "element-plus";
 
 Nprogress.configure({
@@ -99,20 +98,46 @@ const init = async () => {
     Nprogress.done();
   }
 };
-const textarea = ref("");
 
 onMounted(init);
 </script>
 
 <template>
-  <div class="input-t">Request</div>
-      <div class="input">
-        <textarea type="text" spellcheck="false" />
-      </div>
-      <div class="result-t">Responce</div>
-      <div class="result">
-        <TransitionGroup tag="ul" name="list" class="search-list">
-          <HelloWorld v-for="item in searchValue" :key="item.id" :item="item" />
-        </TransitionGroup>
-      </div>
+  <el-form
+    ref="ruleFormRef"
+    :model="form"
+    class="append-form"
+    label-width="180px"
+    :rules="rules"
+  >
+    <el-form-item label="网页标题 Title" prop="title">
+      <el-input v-model="form.title" autocomplete="off" />
+    </el-form-item>
+    <el-form-item label="网址链接 Url" prop="url">
+      <el-input v-model="form.url" autocomplete="off" />
+    </el-form-item>
+    <el-form-item label="网址类型 Type" prop="url">
+      <el-radio-group v-model="form.type">
+        <el-radio label="video">视频</el-radio>
+        <el-radio label="article">文章</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="标签 Tags" prop="type">
+      <el-cascader
+        v-model="form.tag"
+        :options="options"
+        :props="props"
+        placeholder="Vue.js Proxy原理"
+        clearable
+        @change="handleChange"
+      />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="dialogConfirm(ruleFormRef)">
+        保存 Confirm
+      </el-button>
+    </el-form-item>
+  </el-form>
+
+  <div class="_box"></div>
 </template>

@@ -1,35 +1,30 @@
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const link = (url: string) => {
+  router.push(url);
+};
+</script>
+
 <template>
-  <div>
-    <router-link to="/">Home</router-link>|
-    <router-link to="/about">About</router-link>
-    <router-view v-slot="{ Component }">
-      <Suspense>
+  <header></header>
+  <div class="_box">
+    <div class="_aside">
+      <ul>
+        <li @click="link('/')">Homepage</li>
+        <li>Login</li>
+        <li @click="link('/add')">Append Url</li>
+        <li>Help</li>
+        <li>Log</li>
+      </ul>
+    </div>
+    <div class="_container">
+      <router-view v-slot="{ Component }">
         <div>
           <component :is="Component" />
         </div>
-      </Suspense>
-    </router-view>
+      </router-view>
+    </div>
   </div>
 </template>
-
-<style>
-@font-face {
-  font-family: 'Inter';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./assets/fonts/Inter-Italic.woff2#iefix') format('woff2'),
-    url('./assets/fonts/Inter-Italic.woff') format('woff');
-}
-.inter {
-  font-family: 'Inter';
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

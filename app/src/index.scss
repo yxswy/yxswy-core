@@ -1,0 +1,226 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: myFont !important;
+  height: 100vh;
+  overflow: hidden;
+  letter-spacing: 0.4px !important;
+  font-size: 14px !important;
+}
+
+header {
+  background-color: #101112;
+  height: 54px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .append {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #3a3e41;
+      color: white !important;
+    }
+    i {
+      font-size: 18px;
+      color: white;
+    }
+  }
+
+  .append + .append {
+    margin-left: 14px;
+  }
+}
+
+._box {
+  width: 100%;
+  display: flex;
+  height: calc(100vh - 54px);
+  ._aside {
+    width: 400px;
+    background-color: #3a3e41;
+    flex-shrink: 0;
+    box-shadow: 1px 2px 8px rgba(46, 46, 46, 0.45);
+    z-index: 210;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li {
+        height: 38px;
+        background-color: #3a3e41;
+        color: white;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #45484b;
+        cursor: pointer;
+        &:hover {
+          background-color: #4a4f53;
+        }
+      }
+    }
+  }
+  ._container {
+    flex: 1;
+    background-color: #f0f1f2;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.input-t {
+  width: 100%;
+  padding: 8px 16px;
+  background-color: #70b0e0;
+  color: #26292b;
+  flex-shrink: 0;
+}
+
+.input {
+  height: 88px;
+  flex-shrink: 0;
+  textarea {
+    font-family: myFont !important;
+    list-style: none;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 14px !important;
+    padding: 14px;
+    box-sizing: border-box;
+  }
+}
+
+.result-t {
+  padding: 8px 16px;
+  color: #26292b;
+  background: #b7bcc0;
+  flex-shrink: 0;
+}
+
+.result {
+  flex: 1;
+  overflow: auto;
+}
+
+.container {
+  width: 760px;
+  height: auto;
+  min-height: 100px;
+  margin: 60px auto;
+
+  .core-form {
+    .el-form-item__label {
+      font-weight: bold;
+    }
+
+    .el-cascader {
+      width: 400px;
+    }
+    .el-button,
+    .el-input__wrapper {
+      border-radius: 3px;
+    }
+
+    .el-button.el-button--primary {
+      background-color: #0d6dff;
+      border-color: #0d6dff;
+    }
+  }
+}
+
+.append-form {
+  padding-top: 24px;
+  padding-bottom: 12px;
+  .el-button--text {
+    margin-right: 15px;
+  }
+
+  .el-form-item__content {
+    > .el-select {
+      width: calc(100% - 60px);
+    }
+
+    > .el-input {
+      width: calc(100% - 60px);
+    }
+
+    > .el-cascader {
+      width: calc(100% - 60px);
+    }
+  }
+
+  .dialog-footer button:first-child {
+    margin-right: 10px;
+  }
+}
+
+.search-list {
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 7px 14px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(225, 225, 225);
+
+    &:hover {
+      background-color: #3a3e41;
+      a {
+        color: white !important;
+      }
+    }
+
+    a {
+      color: #222226;
+      text-decoration: none;
+    }
+  }
+}
+
+.list-move,
+/* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.12s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
+}
+
+.el-cascader-node {
+  font-weight: 700;
+}
+
+.search-head {
+  display: flex;
+  width: 100%;
+  .el-input {
+    flex: 1;
+  }
+}

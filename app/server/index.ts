@@ -43,7 +43,7 @@ async function createServer() {
     template = fs.readFileSync(resolve("index.html"), "utf-8");
 
     template = await vite.transformIndexHtml(url, template);
-    render = (await vite.ssrLoadModule("/src/entry-server.js")).render;
+    render = (await vite.ssrLoadModule("/src/entry-server.ts")).render;
 
     const mainfest = {};
     const [appHtml, preloadLinks] = await render(url, mainfest);
