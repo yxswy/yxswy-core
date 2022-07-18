@@ -5,6 +5,7 @@ import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 import HelloWorld from "../components/HelloWorld.vue";
 import { FormInstance, FormRules } from "element-plus";
+import { useList } from "../store/index";
 
 Nprogress.configure({
   showSpinner: false,
@@ -106,13 +107,13 @@ onMounted(init);
 
 <template>
   <div class="input-t">Request</div>
-      <div class="input">
-        <textarea type="text" spellcheck="false" />
-      </div>
-      <div class="result-t">Responce</div>
-      <div class="result">
-        <TransitionGroup tag="ul" name="list" class="search-list">
-          <HelloWorld v-for="item in searchValue" :key="item.id" :item="item" />
-        </TransitionGroup>
-      </div>
+  <div class="input">
+    <textarea type="text" spellcheck="false" />
+  </div>
+  <div class="result-t">Responce</div>
+  <div class="result">
+    <TransitionGroup tag="ul" name="list" class="search-list">
+      <HelloWorld v-for="item in searchValue" :key="item.id" :item="item" />
+    </TransitionGroup>
+  </div>
 </template>
