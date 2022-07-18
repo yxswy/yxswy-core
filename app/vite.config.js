@@ -2,7 +2,6 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import WindiCSS from 'vite-plugin-windicss'
 
 const virtualFile = '@virtual-file'
 const virtualId = '\0' + virtualFile
@@ -21,7 +20,6 @@ export default defineConfig(({ command, ssrBuild }) => ({
   plugins: [
     vuePlugin(),
     vueJsx(),
-    WindiCSS(),
     {
       name: 'virtual',
       resolveId(id) {

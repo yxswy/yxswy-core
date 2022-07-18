@@ -38,7 +38,7 @@ async function createServer() {
   app.use("*", async (req: Request, res: Response) => {
     const url = req.originalUrl.replace("/test/", "/");
 
-    let template, render;
+    let template: string, render: Function;
 
     template = fs.readFileSync(resolve("index.html"), "utf-8");
 
